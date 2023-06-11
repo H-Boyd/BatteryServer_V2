@@ -2,8 +2,9 @@
 
 # Secrets
 .clasp.json
-Secrets/
 DeploymentID.json
+ExampleUrls.js
+Secrets.js
 
 # Config
 .vscode
