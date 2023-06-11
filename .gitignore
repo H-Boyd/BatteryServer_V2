@@ -1,0 +1,13 @@
+
+
+# Secrets
+.clasp.json
+Secrets/
+
+# Config
+.vscode
+appsscript.json
+
+
+# Shortcuts
+*.lnk

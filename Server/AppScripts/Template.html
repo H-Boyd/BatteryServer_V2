@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="BatteryList"></div>
+
+  <script>
+    var data = JSON.parse('<?!= JSON.stringify(dataFromServerTemplate) ?>');
+
+    //var hexArray = data.hexArray
+
+    function initialize() {
+      var backgroundHex = data.colour1;
+      var myArray = data.text.split("\n")
+      style = data.styleType
+      var x = "<br><br>"
+      if (style == 1) {//background colour, and text colour
+        var textHex = data.colour2;
+        for (i = 0; i < myArray.length; i++) {
+          x = x + "<p" + i + " style='color:#" + textHex + ";font-family: -apple-system, BlinkMacSystemFont, sans-serif;font-size:35px'>" + myArray[i] + "</p" + i + "><br>";
+        }
+
+      }
+      if ((style == 2) || (style == 3)) {//background colour, get text colour from sheets
+        var backgroundHexArray = data.colourArray1;
+        for (i = 0; i < myArray.length; i++) {
+          x += "<p" + i + " style='color:#" + backgroundHexArray[i] + ";font-family: -apple-system, BlinkMacSystemFont, sans-serif;font-size:35px'>" + myArray[i] + "</p" + i + "><br>";
+        }
+      }
+
+      document.getElementById("BatteryList").innerHTML = x;
+      document.body.style.background = '#' + backgroundHex;
+
+    }
+    window.onload = initialize;
+  </script>
+</body>
+
+</html>
