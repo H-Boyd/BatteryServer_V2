@@ -5,6 +5,14 @@ different devices.
 
 
 ## to do
-- [] import and remove secrets of App Scrips code
-- [] import python code
-- [] import arduino code
+- [x] import and remove secrets of App Scrips code
+- [x] import uploader code
+- [x] import display code
+- [x] remove display secrets
+- [] Fix display spelling
+- [] commit display
+
+
+- [] refactor app scripts
+- [x] refactor uploader code
+- [] refactor display code

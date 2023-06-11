@@ -76,7 +76,7 @@ def main():
     charge = get_battery_charger()
 
     # Retrieve the app scripts deployment ID from the json file
-    ID = get_deployment_id("DeploymentID.json")
+    ID = get_deployment_id("Secrets\DeploymentID.json")
 
     # Create the URL for setting the battery information
     URL = create_URL(ID, computer_name, charge)
