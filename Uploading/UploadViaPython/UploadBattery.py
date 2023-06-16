@@ -69,6 +69,7 @@ def call_URL(URL):
     else:
         print("Dry run mode: would have called url '" + URL + "'")
 
+
 def main():
     # Get the name of the pc
     computer_name = get_pc_name()
@@ -107,12 +108,18 @@ if __name__ == "__main__":
         # If there is an error, set the exit code to 1.
         exit_code = 1
 
+    log_debug_state(DRY_RUN)
+
     log_exit_code(exit_code)
+
+
 
     # Add a line to the log file to separate the executions.
     line_break(LOG_FILE_PATH)
 
     # cut the log file down to an 80 line maximum.
     cut_down(LOG_FILE_PATH, MAX_LOG_FILE_LENGTH)
+
+    
 
     exit(exit_code)

@@ -9,11 +9,11 @@ with the same name.
 
 The following functions are included.
 create_log_file_path:  Creates the path for the log file from given device name.
-configure_logger: Configures the logger for the application
+configure_logger: Configures the logger for the application.
 line_break: Adds a line break in the form of a row of hyphens to a given file.
 cut_down: Trims the given file down to a specified number of lines.
 log_exit_code: Logs the exit code of the application.    
-
+log_debug_state: Logs which debug modes are enables.
 
 """
 
@@ -100,6 +100,19 @@ def cut_down(log_file_name, max_lines):
         with open(log_file_name, "w") as log_file:
             # Rewrite the file with just the last x lines
             log_file.write("".join(lines[lines_to_remove:line_count]))
+
+def log_debug_state(DRY_RUN):
+    """
+    Logs which debug modes are enables
+
+    If DRY_RUN is enabled, add "'DRY_RUN' is enabled." to the log file.
+
+    Parameters:
+    DRY_RUN (bool): The state of the DRY_RUN debug flag.
+    """
+    if DRY_RUN:
+        logging.info("'DRY_RUN' is enabled.")
+
 
 
 def log_exit_code(exit_code):
