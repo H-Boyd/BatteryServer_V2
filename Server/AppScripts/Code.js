@@ -94,8 +94,13 @@ function doGet(event) {//This function Updates a cell or range once a http get i
 }
 
 function CheckForButtonPress(e) {
-  if (ButtonPress("Inboxes!I2")) {
+
+  if (tickboxButtonPress(ss,"Inboxes!I2")) {
     UpdateEmailInboxCount();
+  }
+
+  if (tickboxButtonPress(ss,"Test!E10")) {
+    ss.getRange("Test!E11").setValue(Math.random());
   }
 }
 

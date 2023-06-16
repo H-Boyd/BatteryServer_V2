@@ -1,26 +1,67 @@
-//https://spreadsheet.dev/working-with-checkboxes-in-google-sheets-using-google-apps-script
-function containsCheckbox(a1Notation) {
-  var range = ss.getRange(a1Notation);
-  var validations = range.getDataValidations();
-  return validations[0][0] != null
-    && validations[0][0].getCriteriaType() === SpreadsheetApp.DataValidationCriteria.CHECKBOX;
+/* eslint-disable no-unused-vars */
+
+// TODO Write doc string.
+
+/**
+ * Description placeholder
+ * @date 6/16/2023 - 6:44:51 PM
+ *
+ * @param {*} targetCell - The cell to check for a tickbox.
+ * @return {boolean} - Returns true if a tick-box exists in the provided cell.
+ */
+function doesCheckboxExist(targetCell) {
+  // TODO add range type to doc
+  Logger.log(typeof targetCell);
+
+  const validations = targetCell.getDataValidations();
+  const validation = validations[0][0];
+
+  if (validation === null) {
+    return false;
+  }
+
+  criteria = validation.getCriteriaType();
+  hasCheckbox = criteria === SpreadsheetApp.DataValidationCriteria.CHECKBOX;
+
+  return hasCheckbox;
 }
 
-//tests if a tick-box is set to true, returns its value and sets the value back to false.
-function ButtonPress(tickBox_GAON) {
-  returnValue = false;
-  if (containsCheckbox(tickBox_GAON)) {
-    cellValue = ss.getRange(tickBox_GAON).getValue();
+/**
+ * Checks if a the tickbox in the provided cell is ticked,
+ * If ticked, untick it and return true.
+ * If unticked or nonexistent, return false.
+ * @date 6/16/2023 - 6:03:33 PM
+ *
+ * @param {object} targetSpreadSheet
+ * @param {string} tickBoxA1Notation - The cell reference in global A1 notation.
+ * @return {boolean} - Returns true if the tickbox existed and was true.
+ * @throws {Error} - Throws an error if tickBoxA1Notation is not a
+ *  non empty string.
+ */
+function tickboxButtonPress(targetSpreadSheet, tickBoxA1Notation) {
+  if (typeof tickBoxA1Notation !== "string" || tickBoxA1Notation === "") {
+    throw new Error("tickBox_GAON must be a non empty string");
+  }
+
+  const range = targetSpreadSheet.getRange(tickBoxA1Notation);
+
+  wasPressed = false;
+  if (doesCheckboxExist(range)) {
+    cellValue = range.getValue();
     if (cellValue == true) {
-      ss.getRange(tickBox_GAON).setValue(false);
-      returnValue = true;
+      range.setValue(false);
+      wasPressed = true;
     }
   }
-  return returnValue;
+  return wasPressed;
 }
 
+/**
+ * This is a test function to test various functions in this file.
+ * @date 6/16/2023 - 6:46:45 PM
+ */
 function TestButtonPress() {
-
-  Logger.log(ButtonPress("Inboxes!I2"))
-
+  if (tickboxButtonPress(ss, "Test!E10")) {
+    ss.getRange("Test!E11").setValue(Math.random());
+  }
 }
