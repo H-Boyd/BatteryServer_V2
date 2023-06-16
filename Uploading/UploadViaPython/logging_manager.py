@@ -1,15 +1,36 @@
 import logging
 
 """
-This is logger_manager module.
+module - logging_manager.py
 
-This module is responsible for configuring the logger and managing the log file.
-It includes the following functions:
-- configure_logger: Sets up the logger with specified filename, level, and format.
-- line_break: Adds a line break in the log file to separate different executions.
-- cut_down: Reduces the log file to a specified number of lines, removing the oldest entries if necessary.
-- log_exit_code: Logs the exit code as either an error, or info
+This module creates and manages a log file.
+Each log file is unique to the device, as long as it is not ran on two devices
+with the same name.
+
+The following functions are included.
+create_log_file_path:  Creates the path for the log file from given device name.
+configure_logger: Configures the logger for the application
+line_break: Adds a line break in the form of a row of hyphens to a given file.
+cut_down: Trims the given file down to a specified number of lines.
+log_exit_code: Logs the exit code of the application.    
+
+
 """
+
+def create_log_file_path(device_name):
+    """
+    Creates the path for the log file based on a given device name.
+
+    Takes the name of the device, and indicate that it belongs in the Logs
+    directory by adding "Logs\\" in front of then name, and then indicates
+    that the fie will be a log file by adding ".log" after the name.
+
+    Parameters:
+    device_name (str): The name of the current device.
+    """
+    log_file_name = "Logs\\" + device_name + ".log"
+
+    return log_file_name
 
 
 def configure_logger(log_file_name):
@@ -54,7 +75,7 @@ def line_break(log_file_name):
 
 def cut_down(log_file_name, max_lines):
     """
-    Trims the log file down to a specified number of lines.
+    Trims the given file down to a specified number of lines.
 
     If the log file currently has more than 'max_lines' lines, removes the
     oldest entries until it has 'max_lines' lines. If the file already has

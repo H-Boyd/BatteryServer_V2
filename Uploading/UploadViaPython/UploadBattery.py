@@ -9,8 +9,10 @@ import urllib
 from logging_manager import *
 
 DEPLOYMENT_ID_JSON_PATH = "Secrets\\DeploymentID.json"
-LOG_FILE_PATH = "Logs\\app.log"
 MAX_LOG_FILE_LENGTH = 80
+
+DRY_RUN = False
+
 
 def get_pc_name():
     return socket.gethostname()
@@ -59,16 +61,15 @@ def create_URL(ID, name, value):
 
 
 def call_URL(URL):
-    try:
-        requests.get(URL, timeout=5)
-    except requests.exceptions.Timeout as e:
-        raise Exception(f"Error: {e}")
-
+    if not DRY_RUN:
+        try:
+            requests.get(URL, timeout=5)
+        except requests.exceptions.Timeout as e:
+            raise Exception(f"Error: {e}")
+    else:
+        print("Dry run mode: would have called url '" + URL + "'")
 
 def main():
-
-
-
     # Get the name of the pc
     computer_name = get_pc_name()
 
@@ -92,6 +93,10 @@ if __name__ == "__main__":
     # Set the default exit code to 0
     exit_code = 0
 
+    LOG_FILE_PATH = create_log_file_path(get_pc_name())
+
+    print(LOG_FILE_PATH)
+
     # Configure the logger
     configure_logger(LOG_FILE_PATH)
 
@@ -101,7 +106,6 @@ if __name__ == "__main__":
         logging.exception("An error occurred: %s", str(e))
         # If there is an error, set the exit code to 1.
         exit_code = 1
-
 
     log_exit_code(exit_code)
 

@@ -9,10 +9,10 @@ different devices.
 - [x] import uploader code
 - [x] import display code
 - [x] remove display secrets
-- [] Fix display spelling
-- [] commit display
+- [ ] Fix display spelling
+- [ ] commit display
 
 
-- [] refactor app scripts
+- [ ] refactor app scripts
 - [x] refactor uploader code
-- [] refactor display code
+- [ ] refactor display code
