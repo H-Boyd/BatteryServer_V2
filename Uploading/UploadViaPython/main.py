@@ -1,3 +1,8 @@
+"""
+This script gets the current device's name and battery charge and uploads it
+to a Google AppScripts server.
+"""
+
 import modules.log_file_manager as lfm
 import modules.device_name_manager as name
 import modules.battery as battery
@@ -6,19 +11,17 @@ import modules.url_manager as url
 import modules.path_manager as path
 
 
-DEPLOYMENT_ID_JSON_PATH = "secrets\\DeploymentID.json"
-LOG_FOLDER_NAME = "logs"
-MAX_LOG_FILE_LENGTH = 80
-
+# Constants
 SECRETS_DIRECTORY_NAME = "secrets"
 ID_FILE_NAME = "DeploymentID.json"
 
 LOG_DIRECTORY_NAME = "logs"
-LOG_FILE_EXTENSION = ".log"
+LOG_FILE_TYPE = "log"
+MAX_LOG_FILE_LENGTH = 100
 
 
+flags = {"DRY_RUN": False}
 
-flags = {"DRY_RUN": True}
 
 def main():
     # Get the name of the pc
@@ -26,7 +29,6 @@ def main():
 
     # Get the charge of the pc's battery
     charge = battery.get_battery_charge()
-
 
     id_file_path = path.create_full_path(SECRETS_DIRECTORY_NAME, ID_FILE_NAME)
 
@@ -47,12 +49,13 @@ if __name__ == "__main__":
     # Set the default exit code to 0
     exit_code = 0
 
-    log_file_name = path.add_extension(name.get_device_name(), LOG_FILE_EXTENSION)
-
-    LOG_FILE_PATH = path.create_full_path(LOG_DIRECTORY_NAME, log_file_name)
+    # Create a log file bases on the name of the current device
+    # E.G HPEnvy.log
+    log_file_name = path.add_extension(name.get_device_name(), LOG_FILE_TYPE)
+    log_file_path = path.create_full_path(LOG_DIRECTORY_NAME, log_file_name)
 
     # Configure the logger
-    lfm.configure_logger(LOG_FILE_PATH)
+    lfm.configure_logger(log_file_path)
 
     try:
         main()
@@ -61,14 +64,14 @@ if __name__ == "__main__":
         # If there is an error, set the exit code to 1.
         exit_code = 1
 
+    # Log the current flags and the main functions exit code.
     lfm.log_flags(flags)
-
     lfm.log_exit_code(exit_code)
 
     # Add a line to the log file to separate the executions.
-    lfm.line_break(LOG_FILE_PATH)
+    lfm.line_break(log_file_path)
 
-    # cut the log file down to an 80 line maximum.
-    lfm.trim_log_file(LOG_FILE_PATH, MAX_LOG_FILE_LENGTH)
+    # trim the log file down to a 100 line maximum.
+    lfm.trim_log_file(log_file_path, MAX_LOG_FILE_LENGTH)
 
     exit(exit_code)

@@ -1,6 +1,8 @@
 import logging
 
 """
+module - log_file_manager.py
+
 This module manages a provided log file.
 
 Each log file should be unique to the device, as long as it is not ran on 
@@ -15,6 +17,10 @@ log_exit_code: Logs the exit code of the application.
 
 
 """
+
+# 80 is the default max numnber of characters thgat should be placed on
+# one line.
+LINE_WIDTH = 80
 
 
 def configure_logger(log_file_path):
@@ -42,9 +48,9 @@ def line_break(log_file_path):
     """
     Adds a line break in the form of a row of hyphens to a given file.
 
-    This code opens a given file in append mode, adds 80 hyphens and then
-    a new line character. this is used to separate different executions in the
-    log file.
+    This code opens a given file in append mode, adds 'LINE_WIDTH' hyphens and
+    then a new line character. this is used to separate different executions
+    in the log file.
 
     Args:
         log_file_path (str): The full path of the log file.
@@ -52,7 +58,7 @@ def line_break(log_file_path):
 
     try:
         with open(log_file_path, "a") as log_file:
-            log_file.write("-" * 80)
+            log_file.write("-" * LINE_WIDTH)
             log_file.write("\n")
     except FileNotFoundError:
         logging.error(f"{log_file_path} not found")

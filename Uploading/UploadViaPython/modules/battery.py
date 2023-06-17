@@ -1,15 +1,14 @@
 import psutil
 
 """
+module - battery.py
+
 This module is used to get the battery percentage of the current device,
 
 It uses psutil to get system-level information about the devices battery.
 
 Functions:
 get_battery_charge: Returns a string of the current battery percentage.
-
-Dependencies:
-  - psutil:
 
 """
 

@@ -2,6 +2,9 @@ import socket
 import urllib
 
 """
+module - device_name_manager.py
+
+
 This module is responsible for getting and encoding the name of the device.
 
 Functions:
