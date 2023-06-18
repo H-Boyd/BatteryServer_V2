@@ -1,7 +1,7 @@
 import psutil
 
 """
-module - battery.py
+module - battery_manager.py
 
 This module is used to get the battery percentage of the current device,
 
@@ -12,11 +12,12 @@ get_battery_charge: Returns a string of the current battery percentage.
 
 """
 
+
 def get_battery_charge():
     """
     Returns the current battery percentage of the device, as a string.
 
-    If no battery is found / if the script runs on a device with no battery, 
+    If no battery is found / if the script runs on a device with no battery,
     an Exception is raised with the message "Battery not found".
 
     Raises:

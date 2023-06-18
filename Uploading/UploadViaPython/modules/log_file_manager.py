@@ -18,7 +18,7 @@ log_exit_code: Logs the exit code of the application.
 
 """
 
-# 80 is the default max numnber of characters thgat should be placed on
+# 80 is the default max number of characters that should be placed on
 # one line.
 LINE_WIDTH = 80
 
@@ -66,8 +66,6 @@ def line_break(log_file_path):
         logging.error(f"IO error with {log_file_path}")
 
 
-
-
 def trim_log_file(log_file_path, max_lines):
     """
     Trims the given file down to a specified number of lines.
@@ -100,6 +98,7 @@ def trim_log_file(log_file_path, max_lines):
         logging.error(f"{log_file_path} not found")
     except IOError:
         logging.error(f"IO error with {log_file_path}")
+
 
 def log_flags(flags):
     """
