@@ -5,14 +5,14 @@ different devices.
 
 
 ## to do
-- [x] import and remove secrets of App Scrips code
-- [x] import uploader code
-- [x] import display code
-- [x] remove display secrets
+- [x] Import and remove secrets of App Scrips code
+- [x] Import uploader code
+- [x] Import display code
+- [x] Remove display secrets
 - [ ] Fix display spelling
-- [ ] commit display
+- [ ] Commit display
 
 
-- [ ] refactor app scripts
-- [x] refactor uploader code
-- [ ] refactor display code
+- [ ] Refactor app scripts
+- [x] Refactor uploader code
+- [ ] Refactor display code
