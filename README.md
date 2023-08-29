@@ -1,4 +1,4 @@
-# Battery Uploader
+# Battery Uploader (deprecated)
 
 This projects is for monitoring the battery levels on my various
 different devices.
